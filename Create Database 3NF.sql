@@ -95,6 +95,21 @@ CREATE TABLE ActiviteitCategorie (
 );
 GO
 
+CREATE TABLE Aanmelding (
+    Aanmeldingcode VARCHAR(10) PRIMARY KEY,
+    Deelnemercode VARCHAR(10) NOT NULL,
+    Activiteitcode VARCHAR(10) NOT NULL,
+    Deelnamevorm VARCHAR(50) NOT NULL,
+    Prijs DECIMAL(10,2) NOT NULL,
+    Aanmelddatum DATETIME NOT NULL,
+    AanmeldStatus VARCHAR(50) NOT NULL,
+    CONSTRAINT FK_Aanmelding_Deelnemer FOREIGN KEY (Deelnemercode) 
+        REFERENCES Deelnemer(Deelnemercode),
+    CONSTRAINT FK_Aanmelding_Activiteit FOREIGN KEY (Activiteitcode) 
+        REFERENCES Activiteit(Activiteitcode)
+);
+GO
+
 
 INSERT INTO ActiviteitTypeInfo (ActiviteitType, ActiviteitAttribuut) VALUES
 ('Workshop', 'Interactief'),
@@ -176,4 +191,18 @@ INSERT INTO Deelnemers_ContactKanalen (Deelnemercode, contactwaarde) VALUES
 ('D008', 'h.visser@campus3nf.nl'),
 ('D009', 'bram@techcorp.com'),
 ('D010', 'lisa@innosol.nl');
+GO
+
+INSERT INTO Aanmelding (Aanmeldingcode, Deelnemercode, Activiteitcode, Deelnamevorm, Prijs, Aanmelddatum, AanmeldStatus) VALUES
+('AAN001', 'D001', 'ACT001', 'Fysiek', 0.00, '2026-10-10 10:00:00', 'Bevestigd'),
+('AAN002', 'D001', 'ACT002', 'Fysiek', 25.00, '2026-10-11 11:30:00', 'Bevestigd'),
+('AAN003', 'D002', 'ACT001', 'Online', 0.00, '2026-10-12 09:15:00', 'Bevestigd'),
+('AAN004', 'D002', 'ACT003', 'Fysiek', 50.00, '2026-10-12 14:20:00', 'Bevestigd'),
+('AAN005', 'D003', 'ACT001', 'Online', 0.00, '2026-10-13 08:45:00', 'Bevestigd'),
+('AAN006', 'D003', 'ACT002', 'Fysiek', 25.00, '2026-10-13 16:00:00', 'Wachtlijst'),
+('AAN007', 'D004', 'ACT003', 'Fysiek', 50.00, '2026-10-14 10:10:00', 'Bevestigd'),
+('AAN008', 'D005', 'ACT004', 'Online', 15.00, '2026-10-14 11:00:00', 'Bevestigd'),
+('AAN009', 'D009', 'ACT004', 'Fysiek', 30.00, '2026-10-14 12:30:00', 'Geannuleerd'),
+('AAN010', 'D010', 'ACT005', 'Fysiek', 40.00, '2026-10-14 14:00:00', 'Bevestigd'),
+('AAN011', 'D011', 'ACT001', 'Online', 0.00, '2026-10-14 15:45:00', 'Bevestigd');
 GO
